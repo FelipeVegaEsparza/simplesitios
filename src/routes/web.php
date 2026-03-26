@@ -27,8 +27,7 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     // Dashboard
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
         ->name('dashboard');
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
-        ->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
     
     // Clientes
     Route::resource('clients', App\Http\Controllers\Admin\ClientController::class);
@@ -86,8 +85,7 @@ Route::middleware('client')->prefix('client')->name('client.')->group(function (
     // Dashboard
     Route::get('/', [App\Http\Controllers\Client\DashboardController::class, 'index'])
         ->name('dashboard');
-    Route::get('/dashboard', [App\Http\Controllers\Client\DashboardController::class, 'index'])
-        ->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Client\DashboardController::class, 'index']);
     
     // Perfil
     Route::get('profile', [App\Http\Controllers\Client\ProfileController::class, 'edit'])
