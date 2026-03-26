@@ -17,10 +17,10 @@
             <a href="{{ route('admin.clients.edit', $client) }}" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                 Editar
             </a>
-            <form method="POST" action="{{ route('admin.clients.destroy', $client) }}" class="inline" onsubmit="return confirm('¿Estás seguro de eliminar este cliente? Esta acción no se puede deshacer y eliminará todos sus datos, secciones y contenido.')">
+            <form method="POST" action="{{ route('admin.clients.destroy', $client) }}" class="inline" id="delete-form-client-show-{{ $client->id }}" data-modal="global-delete-modal">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
+                <button type="button" onclick="openDeleteModal('delete-form-client-show-{{ $client->id }}')" class="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
                     Eliminar
                 </button>
             </form>

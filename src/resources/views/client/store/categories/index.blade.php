@@ -72,10 +72,10 @@
                                     </button>
                                 </form>
                                 <span style="color: var(--border-color);">|</span>
-                                <form method="POST" action="{{ route('client.store.categories.destroy', $category) }}" class="inline" onsubmit="return confirm('¿Eliminar esta categoría?')">
+                                <form method="POST" action="{{ route('client.store.categories.destroy', $category) }}" class="inline" id="delete-form-category-{{ $category->id }}" data-modal="global-delete-modal">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-sm text-red-600 hover:underline">Eliminar</button>
+                                    <button type="button" onclick="openDeleteModal('delete-form-category-{{ $category->id }}')" class="text-sm text-red-600 hover:underline">Eliminar</button>
                                 </form>
                             </div>
                         </td>

@@ -227,6 +227,11 @@
         .page-content {
             animation: fadeIn 0.3s ease-out;
         }
+        
+        /* Hide elements with x-cloak before Alpine.js loads */
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
     
     @stack('styles')
@@ -340,6 +345,42 @@
             </main>
         </div>
     </div>
+    
+    <!-- Modal de Confirmación Global -->
+    @include('components.confirm-modal', [
+        'id' => 'global-delete-modal',
+        'title' => 'Confirmar eliminación',
+        'message' => '¿Estás seguro de realizar esta acción? Esta operación no se puede deshacer.',
+        'confirmText' => 'Eliminar',
+        'cancelText' => 'Cancelar'
+    ])
+    
+    <!-- Script del Modal -->
+    <script>
+    document.addEventListener('alpine:init', () => {
+        window.addEventListener('confirm-modal-global-delete-modal', () => {
+            const form = document.querySelector('[data-modal="global-delete-modal"].active');
+            if (form) {
+                form.submit();
+                form.classList.remove('active');
+            }
+        });
+    });
+    
+    window.openDeleteModal = function(formId) {
+        // Remover clase active de todos los formularios
+        document.querySelectorAll('[data-modal="global-delete-modal"]').forEach(f => {
+            f.classList.remove('active');
+        });
+        
+        // Agregar clase active al formulario actual
+        const form = document.getElementById(formId);
+        if (form) {
+            form.classList.add('active');
+            window.dispatchEvent(new CustomEvent('open-modal', { detail: 'global-delete-modal' }));
+        }
+    };
+    </script>
     
     @stack('scripts')
 </body>
